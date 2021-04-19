@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 using namespace std;
+/*动态规划*/
 
 // 第一次做题,采用了动态规划的方法
 // 第二次做的时候可以尝试数学的方法

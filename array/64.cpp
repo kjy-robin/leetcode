@@ -1,5 +1,5 @@
 // ***最小路径和***
-// 动态规划
+/* 动态规划 */
 #include <iostream>
 #include <vector>
 using namespace std;

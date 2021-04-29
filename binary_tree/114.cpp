@@ -1,3 +1,4 @@
+// *** 二叉树展开为链表 ***
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,6 +25,37 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    void dfs(TreeNode *root, queue<TreeNode *> mq)
+    {
+        if (root == nullptr)
+            return;
+        mq.push(root);
+        dfs(root->left, mq);
+        dfs(root->right, mq);
+    }
+    void flatten(TreeNode *root)
+    {
+        queue<TreeNode *> mq;
+        dfs(root, mq);
+        
+        TreeNode *pre=new TreeNode();
+
+        while(!mq.empty())
+        {
+            TreeNode* cur = mq.front();
+            mq.pop();
+            
+            cur->left=nullptr;
+            cur->right=nullptr;
+            
+            pre->right=cur;
+            pre=pre->right;
+        }
+    }
 };
 
 void print(const vector<int> &mv)

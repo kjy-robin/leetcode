@@ -4,7 +4,6 @@
 #include <queue>
 using namespace std;
 
-
 //  Definition for a binary tree node.
 struct TreeNode
 {
@@ -24,6 +23,37 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution
+{
+public:
+    void DFS(TreeNode *root, std::vector<int> &res)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+
+        DFS(root->left, res);
+        res.push_back(root->val);
+        DFS(root->right, res);
+    }
+    TreeNode *increasingBST(TreeNode *root)
+    {
+        std::vector<int> res;
+        TreeNode *dumpy = new TreeNode();
+        TreeNode *cur = dumpy;
+
+        DFS(root, res);
+        for (int i = 0; i != res.size(); i++)
+        {
+            TreeNode *new_node = new TreeNode(res[i]);
+            cur->right = new_node;
+            cur = cur->right;
+        }
+        return dumpy->right;
+    }
 };
 
 void print(const vector<int> &mv)

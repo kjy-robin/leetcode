@@ -1,3 +1,4 @@
+// *** 将有序数组转化为二叉搜索树 ***
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,6 +25,26 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    TreeNode *buildtree(vector<int> &nums, int left, int right)
+    {
+        if (left > right)
+            return nullptr;
+
+        int mid = (left + right) / 2;
+        TreeNode *root = new TreeNode(nums[mid]);
+        root->left = buildtree(nums, left, mid - 1);
+        root->right = buildtree(nums, mid + 1, right);
+
+        return root;
+    }
+    TreeNode *sortedArrayToBST(vector<int> &nums)
+    {
+        return buildtree(nums, 0, nums.size() - 1);
+    }
 };
 
 void print(const vector<int> &mv)

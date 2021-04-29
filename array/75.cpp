@@ -1,7 +1,7 @@
+// *** 颜色分类 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,28 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int l = 0;
+        int r = nums.size() - 1;
+        for (int i = 0; i <= r; i++)
+        {
+            if (nums[i] == 0)
+            {
+                swap(nums[l++], nums[i]);
+            }
+
+            if (nums[i] == 2)
+            {
+                swap(nums[r--], nums[i--]);
+            }
+        }
+        return;
+    }
 };
 
 void print(const vector<int> &mv)

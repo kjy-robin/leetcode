@@ -1,7 +1,7 @@
+// *** 接雨水 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,31 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int left = 0;
+        int right = height.size() - 1;
+        int ans = 0;
+        int leftmax = 0;
+        int rightmax = 0;
+        while (left < right)
+        {
+            leftmax = std::max<int>(leftmax, height[left]);
+            rightmax = std::max<int>(rightmax, height[right]);
+            if (height[left] < height[right])
+            {
+                ans += leftmax - height[left++];
+            }
+            else
+            {
+                ans += rightmax - height[right--];
+            }
+        }
+        return ans;
+    }
 };
 
 void print(const vector<int> &mv)

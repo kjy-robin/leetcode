@@ -1,7 +1,7 @@
+// *** 最长公共前缀 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,31 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.empty())
+        {
+            return "";
+        }
+
+        int length = strs[0].size();
+        for (int i = 0; i < length; i++)
+        {
+            char ch = strs[0][i];
+            for (int j = 1; j < strs.size(); j++)
+            {
+                if(i==strs[j].size()||strs[j][i]!=ch)
+                {
+                    return strs[0].substr(0,i);
+                }
+            }
+        }
+        return strs[0];
+    }
 };
 
 void print(const vector<int> &mv)

@@ -1,7 +1,7 @@
+// *** 位1的个数 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,23 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution
+{
+public:
+    int hammingWeight(uint32_t n)
+    {
+        int num = 0;
+        for (int i = 0; i < 32; i++)
+        {
+            if (n & (1 << i))
+            {
+                num++;
+            }
+        }
+        return num;
+    }
 };
 
 void print(const vector<int> &mv)

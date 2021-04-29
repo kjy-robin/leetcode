@@ -1,7 +1,7 @@
+// *** 括号生成 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,40 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+        string cur;
+        backtrack(ans,cur,0,0,n);
+        return ans;
+    }
+
+    void backtrack(vector<string>& ans ,string& cur,int open,int close, int n )
+    {
+        if (open + close == 2 * n)
+        {
+            ans.push_back(cur);
+        }
+
+        if (open < n)
+        {
+            cur.push_back('(');
+            backtrack(ans, cur, open + 1, close, n);
+            cur.pop_back();
+        }
+
+        if (close < open)
+        {
+            cur.push_back(')');
+            backtrack(ans, cur, open, close + 1, n);
+            cur.pop_back();
+        }
+        return;
+    }
 };
 
 void print(const vector<int> &mv)

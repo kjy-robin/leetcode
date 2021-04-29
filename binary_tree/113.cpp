@@ -1,3 +1,4 @@
+// *** 路径总和 II ***
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,6 +25,37 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+// *** 深度优先搜索 ***
+class Solution
+{
+public:
+    void dfs(TreeNode *root, int sum, vector<vector<int>> &ans, vector<int> &temp)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+
+        temp.push_back(root->val);
+        if (root->left == nullptr && root->right == nullptr && root->val == sum)
+        {
+
+            ans.push_back(temp);
+        }
+        dfs(root->left, sum - root->val, ans, temp);
+        dfs(root->right, sum - root->val, ans, temp);
+        temp.pop_back();
+    }
+
+    vector<vector<int>> pathSum(TreeNode *root, int targetSum)
+    {
+        std::vector<vector<int>> ans = {};
+        std::vector<int> temp;
+        dfs(root, targetSum, ans, temp);
+        return ans;
+    }
 };
 
 void print(const vector<int> &mv)

@@ -1,9 +1,9 @@
+// ***  求根节点到叶节点数字之和 ***
 #include <iostream>
 #include <vector>
 #include <string>
 #include <queue>
 using namespace std;
-
 
 //  Definition for a binary tree node.
 struct TreeNode
@@ -24,6 +24,32 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution
+{
+public:
+    void dfs(TreeNode *root, int pre, int &sum)
+    {
+        if (root == nullptr)
+            return;
+
+        int cur_sum = pre * 10 + root->val;
+        if (root->left == nullptr && root->right == nullptr)
+        {
+            sum += cur_sum;
+            return;
+        }
+
+        dfs(root->left, cur_sum, sum);
+        dfs(root->right, cur_sum, sum);
+    }
+    int sumNumbers(TreeNode *root)
+    {
+        int sum = 0;
+        dfs(root, 0.0, sum);
+        return sum;
+    }
 };
 
 void print(const vector<int> &mv)

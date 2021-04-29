@@ -1,7 +1,7 @@
+// ***  两两交换链表中的节点 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,31 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+
+class Solution
+{
+public:
+    ListNode *swapPairs(ListNode *head)
+    {
+        ListNode *dumpy = new ListNode(0, head);
+        ListNode *pre = dumpy;
+        ListNode *cur = dumpy->next;
+        ListNode *next;
+        while (cur != nullptr)
+        {
+            next = cur->next;
+            if (next == nullptr)
+                break;
+            cur->next = next->next;
+            next->next = cur;
+            pre->next = next;
+            pre = cur;
+            cur = pre->next;
+        }
+        return dumpy->next;
+    }
 };
 
 void print(const vector<int> &mv)

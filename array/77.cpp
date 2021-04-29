@@ -1,7 +1,7 @@
+// *** 组合 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -26,6 +26,7 @@ struct ListNode
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+
 void print(const vector<int> &mv)
 {
     for (size_t i = 0; i != mv.size(); i++)
@@ -34,8 +35,38 @@ void print(const vector<int> &mv)
     }
     cout << endl;
 }
+
+class Solution {
+public:
+   static vector<vector<int>> combine(int n, int k) {
+        vector<vector<int>> ans;
+        vector<int> temp_ans;
+        backtrack(ans,temp_ans,1,n,k);
+        return ans;
+    }
+    
+   static  void backtrack(vector<vector<int>>& ans,vector<int>&temp_ans,int cur,int n,int k)
+    {
+        if (temp_ans.size() == k)
+        {
+            ans.push_back(temp_ans);
+            print(temp_ans);
+            return;
+        }
+
+        for (int i = cur; i <= n; i++)
+        {
+            temp_ans.push_back(i);
+            backtrack(ans, temp_ans, i + 1, n, k);
+            temp_ans.pop_back();
+        }
+        return;
+    }
+};
+
 void Test1()
 {
+    Solution::combine(4,2);
 }
 int main()
 {

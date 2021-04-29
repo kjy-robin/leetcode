@@ -1,7 +1,7 @@
+// *** 二叉树的后序遍历 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,27 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    void backtrack(TreeNode *root, std::vector<int> &res)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+
+        backtrack(root->left, res);
+        backtrack(root->right, res);
+        res.push_back(root->val);
+    }
+    vector<int> postorderTraversal(TreeNode *root)
+    {
+        vector<int> res;
+        backtrack(root,res);
+        return res;
+    }
 };
 
 void print(const vector<int> &mv)

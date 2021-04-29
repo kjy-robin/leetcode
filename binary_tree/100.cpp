@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -16,14 +15,26 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Definition for singly-linked list.
-struct ListNode
+class Solution
 {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+public:
+    bool isSameTree(TreeNode *p, TreeNode *q)
+    {
+        if (p == nullptr && q == nullptr)
+        {
+            return true;
+        }
+        else if (p == nullptr || q == nullptr)
+        {
+            return false;
+        }
+        else if (p->val != q->val)
+        {
+            return false;
+        }
+
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
 };
 
 void print(const vector<int> &mv)

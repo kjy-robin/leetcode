@@ -1,7 +1,7 @@
+// *** 删除排序链表中的重复元素 II ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -24,6 +24,34 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution
+{
+public:
+    ListNode *deleteDuplicates(ListNode *head)
+    {
+        ListNode *dumpy = new ListNode(-1, head);
+        ListNode *cur = dumpy;
+        int x;
+
+        while (cur->next != nullptr && cur->next->next != nullptr)
+        {
+            if (cur->next->val == cur->next->next->val)
+            {
+                int x = cur->next->val;
+                while (cur->next != nullptr && cur->next->val == x)
+                {
+                    cur->next = cur->next->next;
+                }
+            }
+            else
+            {
+                cur=cur->next;
+            }
+        }
+        return dumpy->next;
+    }
 };
 
 void print(const vector<int> &mv)

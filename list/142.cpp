@@ -1,3 +1,4 @@
+// *** 环形链表 II ***
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,6 +25,37 @@ struct ListNode
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+       ListNode *slow=head;
+       ListNode *fast=head;
+
+       while (fast != nullptr)
+       {
+           slow = slow->next;
+           if (fast->next == nullptr)
+           {
+               return nullptr;
+           }
+           fast = fast->next->next;
+
+           if(fast==slow)
+           {
+               ListNode *ptr=head;
+
+               while(ptr!=slow)
+               {
+                   ptr=ptr->next;
+                   slow=slow->next;
+               }
+               return ptr;
+           }
+       }
+       return nullptr;
+    }
 };
 
 void print(const vector<int> &mv)

@@ -1,7 +1,7 @@
+// *** x 的平方根 ***
 #include <iostream>
 #include <vector>
 #include <string>
-#include <queue>
 using namespace std;
 
 
@@ -16,15 +16,28 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Definition for singly-linked list.
-struct ListNode
-{
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+class Solution {
+public:
+    int mySqrt(int x)
+    {
+        int l = 0, r = x, ans = 0;
+        while (l <= r)
+        {
+            int mid = l + (r-l) / 2;
+            if (long(mid * mid) <= x)
+            {
+                ans = mid;
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid - 1;
+            }
+        }
+        return ans;
+    }
 };
+
 
 void print(const vector<int> &mv)
 {
